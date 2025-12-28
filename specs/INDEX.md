@@ -15,7 +15,7 @@ This document provides an index of all epic specifications for the Qt-based desk
 | Epic | Name | Status | Platform | Dependencies |
 |------|------|--------|----------|--------------|
 | [E01](E01/E01.spec.md) | Application Framework | Draft | Cross-platform | None |
-| [E02](E02/E02.spec.md) | Storage Layer | Draft | Cross-platform | E01 |
+| [E02](E02/E02.spec.md) | Storage Layer | **Split** | Cross-platform | E01 |
 | [E03](E03/E03.spec.md) | Broker Integration | Draft | Cross-platform (gRPC) | E01, E02 |
 | [E04](E04/E04.spec.md) | Historical Data Collection | Draft | Cross-platform | E02, E03 |
 | [E05](E05/E05.spec.md) | DSL Parser & Evaluator | Draft | Cross-platform | E02 |
@@ -133,6 +133,56 @@ This document provides an index of all epic specifications for the Qt-based desk
 **Deliverables**: ClickHouse/MongoDB integration, repository pattern, formula language
 
 **Can be developed in parallel.**
+
+---
+
+## E02 Storage Layer - Detailed Breakdown
+
+### Features
+
+| Feature | Title | Tasks | Status |
+|---------|-------|-------|--------|
+| [E02-F01](E02/F01/E02-F01.spec.md) | Domain Entities | 3 | Draft |
+| [E02-F02](E02/F02/E02-F02.spec.md) | Repository Interfaces | 2 | Draft |
+| [E02-F03](E02/F03/E02-F03.spec.md) | Infrastructure Implementation | 6 | Draft |
+| [E02-F04](E02/F04/E02-F04.spec.md) | Data Management Use Cases | 3 | Draft |
+
+### Task Hierarchy
+
+```
+E02 Storage Layer
+├── F01 Domain Entities
+│   ├── T01 Create domain entities (Symbol, Candle, Formula)
+│   ├── T02 Create value objects and enums [P]
+│   └── T03 Implement CandleSeries aggregate
+├── F02 Repository Interfaces
+│   ├── T01 Define repository interfaces
+│   └── T02 Implement InMemory repositories
+├── F03 Infrastructure Implementation
+│   ├── T01 Create ClickHouseManager [P]
+│   ├── T02 Create MongoDBManager [P]
+│   ├── T03 Implement ClickHouseCandleRepository
+│   ├── T04 Implement ClickHouseSymbolRepository [P]
+│   ├── T05 Implement MongoDBFormulaRepository [P]
+│   └── T06 Implement MongoDBStrategyRepository [P]
+└── F04 Data Management Use Cases
+    ├── T01 Create ImportCandlesUseCase
+    ├── T02 Create ExportCandlesUseCase [P]
+    └── T03 Create data validation utilities [P]
+
+[P] = Parallelizable with other [P] tasks in same feature
+```
+
+### Implementation Waves (within E02)
+
+| Wave | Tasks | Parallel Opportunities |
+|------|-------|------------------------|
+| 1 | F01-T01, F01-T02, F01-T03 | T02 can run parallel with T01 |
+| 2 | F02-T01, F02-T02 | Sequential |
+| 3 | F03-T01 through T06 | T01/T02 parallel, T03-T06 parallel |
+| 4 | F04-T01, F04-T02, F04-T03 | T02/T03 parallel, T01 last |
+
+**Total: 4 Features, 14 Tasks**
 
 ---
 
