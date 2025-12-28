@@ -130,7 +130,7 @@ This document provides an index of all epic specifications for the Qt-based desk
 | E02 | Storage Layer | 1-2 weeks |
 | E05 | DSL Parser & Evaluator | 2-3 weeks |
 
-**Deliverables**: DuckDB storage, repository pattern, formula language
+**Deliverables**: ClickHouse/MongoDB integration, repository pattern, formula language
 
 **Can be developed in parallel.**
 
@@ -198,7 +198,9 @@ This document provides an index of all epic specifications for the Qt-based desk
 | Charts | PyQtGraph |
 | Data Processing | pandas, numpy |
 | Technical Indicators | TA-Lib, pandas-ta |
-| Local Database | DuckDB |
+| Time-Series Database | ClickHouse (shared with JTS) |
+| Document Database | MongoDB (shared with JTS) |
+| Cache | Redis (shared with JTS) |
 | Broker Communication | gRPC (grpcio) |
 | Testing | pytest, pytest-qt |
 | Linting | ruff, mypy |
