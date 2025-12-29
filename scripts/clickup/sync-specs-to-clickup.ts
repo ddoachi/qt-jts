@@ -36,6 +36,7 @@ if (fs.existsSync(envPath)) {
 }
 
 const CLICKUP_API_KEY = process.env['CLICKUP_API_KEY'];
+const CLICKUP_SPACE_NAME = process.env['CLICKUP_SPACE_NAME'];
 const CLICKUP_API_BASE = 'https://api.clickup.com/api/v2';
 
 if (!CLICKUP_API_KEY) {
@@ -1602,7 +1603,7 @@ async function main() {
     spec: args.find((arg) => arg.startsWith('--spec='))?.split('=')[1],
     dryRun: args.includes('--dry-run'),
     spaceId: args.find((arg) => arg.startsWith('--space-id='))?.split('=')[1],
-    spaceName: args.find((arg) => arg.startsWith('--space='))?.split('=')[1],
+    spaceName: args.find((arg) => arg.startsWith('--space='))?.split('=')[1] || CLICKUP_SPACE_NAME,
     taskId: args.find((arg) => arg.startsWith('--id='))?.split('=')[1],
     createWorktree: args.includes('--create-worktree'),
     prNumber: prArg ? parseInt(prArg, 10) : undefined,
