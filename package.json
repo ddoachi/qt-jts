@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "clickup:sync": "yarn exec ts-node scripts/clickup/sync-specs-to-clickup.ts",
+    "spec:next": "yarn exec ts-node scripts/workflow/next-spec.ts",
+    "spec:start": "yarn exec ts-node scripts/workflow/start-spec.ts",
+    "verify": "./scripts/verify.sh"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "js-yaml": "^4.1.1",
+    "yaml": "^2.8.2"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
+  }
+}
